@@ -92,11 +92,11 @@ bst.Node = {
 };
 bst.join = function(front, back) {
    var __this = this;
-  var coll18 = mobl.range(0, back.length);
-  var length15 = coll18.length;
-  for(var i23 = 0; i23 < length15; i23++) {
+  var coll0 = mobl.range(0, back.length);
+  var length0 = coll0.length;
+  for(var i0 = 0; i0 < length0; i0++) {
     var index;
-    index = coll18.get(i23);
+    index = coll0.get(i0);
     front.push(back.get(index));
   }
 };

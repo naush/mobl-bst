@@ -1,38 +1,38 @@
 module bst
 
 type Node {
-	left  : Node
-	right : Node
-	value : Num
-	count : Num
-	
-	function insert(node : Node) {
-	  if (node.value < this.value) {
-	    if (this.left) {
-	      this.left.insert(node);
-	    } else {
+  left  : Node
+  right : Node
+  value : Num
+  count : Num
+  
+  function insert(node : Node) {
+    if (node.value < this.value) {
+      if (this.left) {
+        this.left.insert(node);
+      } else {
         this.left = node;
-	    }
-	  } else if (node.value > this.value) {
+      }
+    } else if (node.value > this.value) {
       if (this.right) {
         this.right.insert(node);
       } else {
         this.right = node;
       }
-	  } else {
-	    this.count = this.count + 1;
-	  }
-	}
-	
-	function find(value : Num) : Node {
-	  if (value < this.value) {
+    } else {
+      this.count = this.count + 1;
+    }
+  }
+  
+  function find(value : Num) : Node {
+    if (value < this.value) {
       return (this.left && this.left.find(value)); 
     } else if (value > this.value) {
       return (this.right && this.right.find(value));
     } else {
       return this;
     }
-	}
+  }
 
   function delete(parent : Node, value : Num) {
     if (value < this.value) {
@@ -73,11 +73,11 @@ type Node {
   }
   
   function sort() : [Num] {
-  	var sorted = [];
-  	if (this.left) {
-  		join(sorted, this.left.sort());
-  	}
-  	sorted.insert(sorted.length, this.value);
+    var sorted = [];
+    if (this.left) {
+      join(sorted, this.left.sort());
+    }
+    sorted.insert(sorted.length, this.value);
     if (this.right) {
       join(sorted, this.right.sort());
     }
