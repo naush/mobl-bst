@@ -1,22 +1,25 @@
 module bst
 
 type Node {
-  left  : Node
-  right : Node
-  value : Num
-  count : Num
+  parent : Node
+  left   : Node
+  right  : Node
+  value  : Num
+  count  : Num
   
   function insert(node : Node) {
     if (node.value < this.value) {
       if (this.left) {
         this.left.insert(node);
       } else {
+        node.parent = this;
         this.left = node;
       }
     } else if (node.value > this.value) {
       if (this.right) {
         this.right.insert(node);
       } else {
+        node.parent = this;
         this.right = node;
       }
     } else {
@@ -34,33 +37,35 @@ type Node {
     }
   }
 
-  function delete(parent : Node, value : Num) {
+  function delete(value : Num) {
     if (value < this.value) {
-      this.left && this.left.delete(this, value);
+      this.left && this.left.delete(value);
     } else if (value > this.value) {
-      this.right && this.right.delete(this, value);
+      this.right && this.right.delete(value);
     } else {
       if (this.left && this.right) {
         var min = this.right.findMin();
-        this.delete(parent, min.value);
-        min.left = this.left;
-        min.right = this.right;
-        this.replaceChild(parent, min);
+        this.delete(min.value);
+        this.replace(min);
       } else if (this.left) {
-        this.replaceChild(parent, this.left);
+        this.replace(this.left);
       } else if (this.right) {
-        this.replaceChild(parent, this.right);
+        this.replace(this.right);
       } else {
-        this.replaceChild(parent, null);
+        this.replace(null);
       }
     }
   }
   
-  function replaceChild(parent : Node, child : Node) {
-    if (parent.left == this) {
-      parent.left = child;
+  function replace(replacement : Node) {
+  	if (replacement) {
+	    replacement.left = this.left;
+	    replacement.right = this.right;
+  	}
+    if (this.parent.left == this) {
+      this.parent.left = replacement;
     } else {
-      parent.right = child;
+      this.parent.right = replacement;
     }
   }
   

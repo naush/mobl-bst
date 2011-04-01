@@ -1,6 +1,7 @@
 mobl.provides('bst');
 
 bst.Node = {
+  parent: null,
   left: null,
   right: null,
   value: null,
@@ -11,12 +12,14 @@ bst.Node = {
            if(__this.left) {
              __this.left.insert(node);
            } else {
+             node.parent = __this;
              __this.left = node;
            }
          } else if(node.value > __this.value) {
            if(__this.right) {
              __this.right.insert(node);
            } else {
+             node.parent = __this;
              __this.right = node;
            }
          } else {
@@ -33,35 +36,39 @@ bst.Node = {
            return __this;
          }
        },
-  delete: function(parent, value) {
+  delete: function(value) {
           var __this = this;
          if(value < __this.value) {
-           __this.left && __this.left.delete(__this, value);
+           __this.left && __this.left.delete(value);
          } else if(value > __this.value) {
-           __this.right && __this.right.delete(__this, value);
+           __this.right && __this.right.delete(value);
          } else {
            if(__this.left && __this.right) {
              var min = __this.right.findMin();
              
-             __this.delete(parent, min.value);
-             min.left = __this.left;
-             min.right = __this.right;
-             __this.replaceChild(parent, min);
+             __this.delete(min.value);
+             __this.replace(min);
            } else if(__this.left) {
-             __this.replaceChild(parent, __this.left);
+             __this.replace(__this.left);
            } else if(__this.right) {
-             __this.replaceChild(parent, __this.right);
+             __this.replace(__this.right);
            } else {
-             __this.replaceChild(parent, null);
+             __this.replace(null);
            }
          }
        },
-  replaceChild: function(parent, child) {
+  replace: function(replacement) {
           var __this = this;
-         if(parent.left == __this) {
-           parent.left = child;
+         if(replacement) {
+           replacement.left = __this.left;
+           replacement.right = __this.right;
          } else {
-           parent.right = child;
+           
+         }
+         if(__this.parent.left == __this) {
+           __this.parent.left = replacement;
+         } else {
+           __this.parent.right = replacement;
          }
        },
   findMin: function() {
@@ -92,11 +99,11 @@ bst.Node = {
 };
 bst.join = function(front, back) {
    var __this = this;
-  var coll2 = mobl.range(0, back.length);
-  var length2 = coll2.length;
-  for(var i2 = 0; i2 < length2; i2++) {
+  var coll32 = mobl.range(0, back.length);
+  var length29 = coll32.length;
+  for(var i29 = 0; i29 < length29; i29++) {
     var index;
-    index = coll2.get(i2);
+    index = coll32.get(i29);
     front.push(back.get(index));
   }
 };

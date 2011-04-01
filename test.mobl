@@ -15,6 +15,11 @@ testSuite("Node", [
     var root = Node(value=2, left=left, right=right);
     assertEqual(left, root.left);
     assertEqual(right, root.right);
+  }),
+  testCase("A node has parent", {
+    var root = Node(value=2);
+    var child = Node(value=1, parent=root);
+    assertEqual(root, child.parent);
   })
 ]);
 
@@ -24,12 +29,14 @@ testSuite("Insertion", [
     var root = Node(value=2);
     root.insert(left);
     assertEqual(left, root.left);
+    assertEqual(root, left.parent);
   }),
   testCase("Insert node with value greater than root to right", {
     var right = Node(value=3);
     var root = Node(value=2);
     root.insert(right);
     assertEqual(right, root.right);
+    assertEqual(root, right.parent);
   }),
   testCase("Insert left node recursively", {
     var insertMe = Node(value=1);
@@ -98,24 +105,30 @@ testSuite("Find", [
 
 testSuite("Deletion", [
   testCase("Delete a node with no children", {
+    var parent = Node(value=2, parent=null);
     var child = Node(value=1);
-    var parent = Node(value=2, left=child);
-    parent.delete(null, 1);
+    parent.insert(child);
+    parent.delete(1);
     assertEqual(null, parent.left);
   }),
   testCase("Delete a node with one child", {
     var grandChild = Node(value=0);
-    var child = Node(value=1, left=grandChild);
-    var parent = Node(value=2, left=child);
-    parent.delete(null, 1);
+    var child = Node(value=1);
+    var parent = Node(value=2);
+    parent.insert(child);
+    parent.insert(grandChild);
+    parent.delete(1);
     assertEqual(grandChild, parent.left);
   }),
   testCase("Delete a node with both children", {
     var leftGrandChild = Node(value=1);
     var rightGrandChild = Node(value=3);
-    var child = Node(value=2, left=leftGrandChild, right=rightGrandChild);
-    var parent = Node(value=4, left=child);
-    parent.delete(null, 2);
+    var child = Node(value=2);
+    var parent = Node(value=4);
+    parent.insert(child);
+    parent.insert(leftGrandChild);
+    parent.insert(rightGrandChild);
+    parent.delete(2);
     assertEqual(rightGrandChild, parent.left);
     assertEqual(null, parent.right);
     assertEqual(null, parent.find(2));
@@ -138,7 +151,7 @@ testSuite("Deletion", [
     node4.insert(node6);
     node8.insert(node4);
     
-    node8.delete(null, node4.value);
+    node8.delete(node4.value);
 
     assertEqual(5, node8.left.value);
     assertEqual(null, node8.right);
@@ -154,7 +167,7 @@ testSuite("Deletion", [
   }),
   testCase("Delete a nonexistent node", {
     var node = Node(value=0);
-    node.delete(null, 1);
+    node.delete(1);
     assertEqual(0, node.value);
     assertEqual(null, node.left);
     assertEqual(null, node.right);
