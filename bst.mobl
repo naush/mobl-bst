@@ -36,9 +36,9 @@ type Node {
 
   function delete(parent : Node, value : Num) {
     if (value < this.value) {
-      this.left.delete(this, value);
+      this.left && this.left.delete(this, value);
     } else if (value > this.value) {
-      this.right.delete(this, value);
+      this.right && this.right.delete(this, value);
     } else {
       if (this.left && this.right) {
         var min = this.right.findMin();

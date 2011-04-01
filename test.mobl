@@ -85,7 +85,7 @@ testSuite("Find", [
     parent.insert(right_right);
     assertEqual(right_right, parent.find(value));
   }),
-  testCase("Return null for non-existant value", {
+  testCase("Return null for nonexistent value", {
     var left = Node(value=1);
     var right = Node(value=3);
     var parent = Node(value=2, left=left, right=right);
@@ -151,6 +151,13 @@ testSuite("Deletion", [
     assertEqual(node6, node8.find(6));
     assertEqual(node7, node8.find(7));
     assertEqual(node8, node8.find(8));
+  }),
+  testCase("Delete a nonexistent node", {
+    var node = Node(value=0);
+    node.delete(null, 1);
+    assertEqual(0, node.value);
+    assertEqual(null, node.left);
+    assertEqual(null, node.right);
   })
 ]);
 

@@ -36,9 +36,9 @@ bst.Node = {
   delete: function(parent, value) {
           var __this = this;
          if(value < __this.value) {
-           __this.left.delete(__this, value);
+           __this.left && __this.left.delete(__this, value);
          } else if(value > __this.value) {
-           __this.right.delete(__this, value);
+           __this.right && __this.right.delete(__this, value);
          } else {
            if(__this.left && __this.right) {
              var min = __this.right.findMin();
@@ -92,11 +92,11 @@ bst.Node = {
 };
 bst.join = function(front, back) {
    var __this = this;
-  var coll0 = mobl.range(0, back.length);
-  var length0 = coll0.length;
-  for(var i0 = 0; i0 < length0; i0++) {
+  var coll2 = mobl.range(0, back.length);
+  var length2 = coll2.length;
+  for(var i2 = 0; i2 < length2; i2++) {
     var index;
-    index = coll0.get(i0);
+    index = coll2.get(i2);
     front.push(back.get(index));
   }
 };
