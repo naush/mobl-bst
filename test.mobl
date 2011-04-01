@@ -1,0 +1,203 @@
+application test
+
+import mobl::ui::generic
+import mobl::test
+import bst
+
+testSuite("Node", [
+  testCase("A node has value", {
+    var root = Node(value=1);
+    assertEqual(1, root.value);
+  }),
+  testCase("A node has left and right children", {
+    var left = Node(value=1);
+    var right = Node(value=3);
+    var root = Node(value=2, left=left, right=right);
+    assertEqual(left, root.left);
+    assertEqual(right, root.right);
+  })
+]);
+
+testSuite("Insertion", [
+  testCase("Insert node with value less than root to left", {
+    var left = Node(value=1);
+    var root = Node(value=2);
+    root.insert(left);
+    assertEqual(left, root.left);
+  }),
+  testCase("Insert node with value greater than root to right", {
+    var right = Node(value=3);
+    var root = Node(value=2);
+    root.insert(right);
+    assertEqual(right, root.right);
+  }),
+  testCase("Insert left node recursively", {
+    var insertMe = Node(value=1);
+    var root = Node(value=3, left=Node(value=2), right=Node(value=4));
+    root.insert(insertMe);
+    assertEqual(insertMe, root.left.left);
+  }),
+  testCase("Insert right node recursively", {
+    var insertMe = Node(value=5);
+    var root = Node(value=3, left=Node(value=2), right=Node(value=4));
+    root.insert(insertMe);
+    assertEqual(insertMe, root.right.right);
+  }),
+  testCase("Insert node with the same value increments count", {
+    var insertMe = Node(value=5);
+    var root = Node(value=5);
+    root.insert(insertMe);
+    assertEqual(1, root.count);
+  })
+]);
+
+testSuite("Find", [
+  testCase("Return parent if value is found on parent", {
+    var value = 1;
+    var parent = Node(value=value);
+    assertEqual(parent, parent.find(value));
+  }),
+  testCase("Return left node if value is found on left node", {
+    var value = 1;
+    var left = Node(value=value);
+    var parent = Node(value=2, left=left);
+    assertEqual(left, parent.find(value));
+  }),
+  testCase("Return right node if value is found on right node", {
+    var value = 2;
+    var right = Node(value=value);
+    var parent = Node(value=1, right=right);
+    assertEqual(right, parent.find(value));
+  }),
+  testCase("Find left recursively", {
+    var value = 1;
+    var leftLeft = Node(value=value);
+    var left = Node(value=2);
+    var parent = Node(value=3, left=left);
+    parent.insert(leftLeft);
+    assertEqual(leftLeft, parent.find(value));
+  }),
+  testCase("Find right recursively", {
+    var value = 3;
+    var right_right = Node(value=value);
+    var right = Node(value=2);
+    var parent = Node(value=1, right=right);
+    parent.insert(right_right);
+    assertEqual(right_right, parent.find(value));
+  }),
+  testCase("Return null for non-existant value", {
+    var left = Node(value=1);
+    var right = Node(value=3);
+    var parent = Node(value=2, left=left, right=right);
+    assertEqual(null, parent.find(4));
+    // assertEqual(null, null && left);
+    // assertEqual(left, left && left);
+    // assertEqual(right, left && right);
+  })
+]);
+
+testSuite("Deletion", [
+  testCase("Delete a node with no children", {
+    var child = Node(value=1);
+    var parent = Node(value=2, left=child);
+    parent.delete(null, 1);
+    assertEqual(null, parent.left);
+  }),
+  testCase("Delete a node with one child", {
+    var grandChild = Node(value=0);
+    var child = Node(value=1, left=grandChild);
+    var parent = Node(value=2, left=child);
+    parent.delete(null, 1);
+    assertEqual(grandChild, parent.left);
+  }),
+  testCase("Delete a node with both children", {
+    var leftGrandChild = Node(value=1);
+    var rightGrandChild = Node(value=3);
+    var child = Node(value=2, left=leftGrandChild, right=rightGrandChild);
+    var parent = Node(value=4, left=child);
+    parent.delete(null, 2);
+    assertEqual(rightGrandChild, parent.left);
+    assertEqual(null, parent.right);
+    assertEqual(null, parent.find(2));
+  }),
+  testCase("Delete a node with left and right subtrees", {
+    var node1 = Node(value=1);
+    var node2 = Node(value=2);
+    var node3 = Node(value=3);
+    var node4 = Node(value=4);
+    var node5 = Node(value=5);
+    var node6 = Node(value=6);
+    var node7 = Node(value=7);
+    var node8 = Node(value=8);
+
+    node2.insert(node1);
+    node2.insert(node3);
+    node6.insert(node5);
+    node6.insert(node7);
+    node4.insert(node2);
+    node4.insert(node6);
+    node8.insert(node4);
+    
+    node8.delete(null, node4.value);
+
+    assertEqual(5, node8.left.value);
+    assertEqual(null, node8.right);
+
+    assertEqual(node1, node8.find(1));
+    assertEqual(node2, node8.find(2));
+    assertEqual(node3, node8.find(3));
+    assertEqual(null, node8.find(4));
+    assertEqual(node5, node8.find(5));
+    assertEqual(node6, node8.find(6));
+    assertEqual(node7, node8.find(7));
+    assertEqual(node8, node8.find(8));
+  })
+]);
+
+testSuite("Sort", [
+  testCase("Sort a tree with one node", {
+    var parent = Node(value=0);
+    var sorted = parent.sort();
+    assertEqual(0, sorted.get(0));
+  }),
+  testCase("Sort a tree with two nodes", {
+    var node1 = Node(value=1);
+    var node2 = Node(value=2);
+    node2.insert(node1);
+    var sorted = node2.sort();
+    assertEqual(1, sorted.get(0));
+    assertEqual(2, sorted.get(1));
+  }),
+  testCase("Sort a tree with eight nodes", {
+    var node1 = Node(value=1);
+    var node2 = Node(value=2);
+    var node3 = Node(value=3);
+    var node4 = Node(value=4);
+    var node5 = Node(value=5);
+    var node6 = Node(value=6);
+    var node7 = Node(value=7);
+    var node8 = Node(value=8);
+
+    node2.insert(node1);
+    node2.insert(node3);
+    node6.insert(node5);
+    node6.insert(node7);
+    node4.insert(node2);
+    node4.insert(node6);
+    node8.insert(node4);
+    
+    var sorted = node8.sort();
+    assertEqual(1, sorted.get(0));
+    assertEqual(2, sorted.get(1));
+    assertEqual(3, sorted.get(2));
+    assertEqual(4, sorted.get(3));
+    assertEqual(5, sorted.get(4));
+    assertEqual(6, sorted.get(5));
+    assertEqual(7, sorted.get(6));
+    assertEqual(8, sorted.get(7));
+  })
+]);
+
+screen root() {
+  testRunner()
+}

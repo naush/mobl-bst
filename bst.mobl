@@ -1,0 +1,92 @@
+module bst
+
+type Node {
+	left  : Node
+	right : Node
+	value : Num
+	count : Num
+	
+	function insert(node : Node) {
+	  if (node.value < this.value) {
+	    if (this.left) {
+	      this.left.insert(node);
+	    } else {
+        this.left = node;
+	    }
+	  } else if (node.value > this.value) {
+      if (this.right) {
+        this.right.insert(node);
+      } else {
+        this.right = node;
+      }
+	  } else {
+	    this.count = this.count + 1;
+	  }
+	}
+	
+	function find(value : Num) : Node {
+	  if (value < this.value) {
+      return (this.left && this.left.find(value)); 
+    } else if (value > this.value) {
+      return (this.right && this.right.find(value));
+    } else {
+      return this;
+    }
+	}
+
+  function delete(parent : Node, value : Num) {
+    if (value < this.value) {
+      this.left.delete(this, value);
+    } else if (value > this.value) {
+      this.right.delete(this, value);
+    } else {
+      if (this.left && this.right) {
+        var min = this.right.findMin();
+        this.delete(parent, min.value);
+        min.left = this.left;
+        min.right = this.right;
+        this.replaceChild(parent, min);
+      } else if (this.left) {
+        this.replaceChild(parent, this.left);
+      } else if (this.right) {
+        this.replaceChild(parent, this.right);
+      } else {
+        this.replaceChild(parent, null);
+      }
+    }
+  }
+  
+  function replaceChild(parent : Node, child : Node) {
+    if (parent.left == this) {
+      parent.left = child;
+    } else {
+      parent.right = child;
+    }
+  }
+  
+  function findMin() : Node {
+    if (this.left) {
+      return this.left.findMin();
+    } else {
+      return this;
+    }
+  }
+  
+  function sort() : [Num] {
+  	var sorted = [];
+  	if (this.left) {
+  		join(sorted, this.left.sort());
+  	}
+  	sorted.insert(sorted.length, this.value);
+    if (this.right) {
+      join(sorted, this.right.sort());
+    }
+    return sorted;
+  }
+}
+
+function join(front : [Num], back : [Num]) {
+  foreach (index in range(0, back.length)) {
+    front.push(back.get(index));
+  }
+}
