@@ -58,10 +58,10 @@ type Node {
   }
   
   function replace(replacement : Node) {
-  	if (replacement) {
-	    replacement.left = this.left;
-	    replacement.right = this.right;
-  	}
+    if (replacement) {
+      replacement.left = this.left;
+      replacement.right = this.right;
+    }
     if (this.parent.left == this) {
       this.parent.left = replacement;
     } else {
