@@ -1,6 +1,6 @@
-mobl.provides('bst');
+mobl.provides('node');
 
-bst.Node = {
+node.Node = {
   parent: null,
   left: null,
   right: null,
@@ -47,8 +47,6 @@ bst.Node = {
              var min = __this.right.findMin();
              
              __this.delete(min.value);
-             min.left = __this.left;
-             min.right = __this.right;
              __this.replace(min);
            } else if(__this.left) {
              __this.replace(__this.left);
@@ -61,6 +59,12 @@ bst.Node = {
        },
   replace: function(replacement) {
           var __this = this;
+         if(replacement) {
+           replacement.left = __this.left;
+           replacement.right = __this.right;
+         } else {
+           
+         }
          if(__this.parent.left == __this) {
            __this.parent.left = replacement;
          } else {
@@ -80,26 +84,26 @@ bst.Node = {
          var sorted = [];
          
          if(__this.left) {
-           bst.join(sorted, __this.left.sort());
+           node.join(sorted, __this.left.sort());
          } else {
            
          }
          sorted.insert(sorted.length, __this.value);
          if(__this.right) {
-           bst.join(sorted, __this.right.sort());
+           node.join(sorted, __this.right.sort());
          } else {
            
          }
          return sorted;
        }
 };
-bst.join = function(front, back) {
+node.join = function(front, back) {
    var __this = this;
-  var coll1 = mobl.range(0, back.length);
-  var length1 = coll1.length;
-  for(var i1 = 0; i1 < length1; i1++) {
+  var coll35 = mobl.range(0, back.length);
+  var length32 = coll35.length;
+  for(var i32 = 0; i32 < length32; i32++) {
     var index;
-    index = coll1.get(i1);
+    index = coll35.get(i32);
     front.push(back.get(index));
   }
 };

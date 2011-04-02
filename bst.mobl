@@ -46,6 +46,8 @@ type Node {
       if (this.left && this.right) {
         var min = this.right.findMin();
         this.delete(min.value);
+        min.left = this.left;
+        min.right = this.right;
         this.replace(min);
       } else if (this.left) {
         this.replace(this.left);
@@ -58,10 +60,6 @@ type Node {
   }
   
   function replace(replacement : Node) {
-    if (replacement) {
-      replacement.left = this.left;
-      replacement.right = this.right;
-    }
     if (this.parent.left == this) {
       this.parent.left = replacement;
     } else {

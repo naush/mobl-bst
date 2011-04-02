@@ -3,21 +3,21 @@ mobl.provides('mobl.ui');
 mobl.provides('mobl');
 persistence.debug = false;
 test.root = function(callback, screenCallback) {
-  var root5424 = $("<div>");
+  var root5599 = $("<div>");
   var subs__ = new mobl.CompSubscription();
-  var nodes28 = $("<span>");
-  root5424.append(nodes28);
+  var nodes31 = $("<span>");
+  root5599.append(nodes31);
   subs__.addSub((mobl.test.testRunner)(function(_, callback) {
-    var root5425 = $("<span>");
+    var root5600 = $("<span>");
     var subs__ = new mobl.CompSubscription();
-    callback(root5425); return subs__;
+    callback(root5600); return subs__;
     return subs__;
   }, function(node) {
-    var oldNodes = nodes28;
-    nodes28 = node.contents();
-    oldNodes.replaceWith(nodes28);
+    var oldNodes = nodes31;
+    nodes31 = node.contents();
+    oldNodes.replaceWith(nodes31);
   }));
-  callback(root5424); return subs__;
+  callback(root5599); return subs__;
   
   return subs__;
 };
@@ -26,7 +26,7 @@ var result__ = mobl.test.testSuite("Node", [mobl.test.testCase("A node has value
                                                      var result__ = mobl.instantiate(bst.Node, {'value': 1});
                                                      var root = result__;
                                                      mobl.test.assertEqual(1, root.value, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1070 = result__;
+                                                       var tmp1164 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("A node has left and right children", function(event, callback) {
@@ -38,9 +38,9 @@ var result__ = mobl.test.testSuite("Node", [mobl.test.testCase("A node has value
                                                      var result__ = mobl.instantiate(bst.Node, {'value': 2, 'left': left, 'right': right});
                                                      var root = result__;
                                                      mobl.test.assertEqual(left, root.left, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1071 = result__;
+                                                       var tmp1165 = result__;
                                                        mobl.test.assertEqual(right, root.right, mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1072 = result__;
+                                                         var tmp1166 = result__;
                                                          if(callback && callback.apply) callback(); return;
                                                        });
                                                      });
@@ -51,7 +51,7 @@ var result__ = mobl.test.testSuite("Node", [mobl.test.testCase("A node has value
                                                      var result__ = mobl.instantiate(bst.Node, {'value': 1, 'parent': root});
                                                      var child = result__;
                                                      mobl.test.assertEqual(root, child.parent, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1073 = result__;
+                                                       var tmp1167 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    })]);
@@ -63,9 +63,9 @@ var result__ = mobl.test.testSuite("Insertion", [mobl.test.testCase("Insert node
                                                      var root = result__;
                                                      var result__ = root.insert(left);
                                                      mobl.test.assertEqual(left, root.left, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1074 = result__;
+                                                       var tmp1168 = result__;
                                                        mobl.test.assertEqual(root, left.parent, mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1075 = result__;
+                                                         var tmp1169 = result__;
                                                          if(callback && callback.apply) callback(); return;
                                                        });
                                                      });
@@ -77,9 +77,9 @@ var result__ = mobl.test.testSuite("Insertion", [mobl.test.testCase("Insert node
                                                      var root = result__;
                                                      var result__ = root.insert(right);
                                                      mobl.test.assertEqual(right, root.right, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1076 = result__;
+                                                       var tmp1170 = result__;
                                                        mobl.test.assertEqual(root, right.parent, mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1077 = result__;
+                                                         var tmp1171 = result__;
                                                          if(callback && callback.apply) callback(); return;
                                                        });
                                                      });
@@ -91,7 +91,7 @@ var result__ = mobl.test.testSuite("Insertion", [mobl.test.testCase("Insert node
                                                      var root = result__;
                                                      var result__ = root.insert(insertMe);
                                                      mobl.test.assertEqual(insertMe, root.left.left, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1078 = result__;
+                                                       var tmp1172 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Insert right node recursively", function(event, callback) {
@@ -102,7 +102,7 @@ var result__ = mobl.test.testSuite("Insertion", [mobl.test.testCase("Insert node
                                                      var root = result__;
                                                      var result__ = root.insert(insertMe);
                                                      mobl.test.assertEqual(insertMe, root.right.right, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1079 = result__;
+                                                       var tmp1173 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Insert node with the same value increments count", function(event, callback) {
@@ -113,7 +113,7 @@ var result__ = mobl.test.testSuite("Insertion", [mobl.test.testCase("Insert node
                                                      var root = result__;
                                                      var result__ = root.insert(insertMe);
                                                      mobl.test.assertEqual(1, root.count, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1080 = result__;
+                                                       var tmp1174 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    })]);
@@ -124,7 +124,7 @@ var result__ = mobl.test.testSuite("Find", [mobl.test.testCase("Return parent if
                                                      var result__ = mobl.instantiate(bst.Node, {'value': value});
                                                      var parent = result__;
                                                      mobl.test.assertEqual(parent, parent.find(value), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1081 = result__;
+                                                       var tmp1175 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Return left node if value is found on left node", function(event, callback) {
@@ -136,7 +136,7 @@ var result__ = mobl.test.testSuite("Find", [mobl.test.testCase("Return parent if
                                                      var result__ = mobl.instantiate(bst.Node, {'value': 2, 'left': left});
                                                      var parent = result__;
                                                      mobl.test.assertEqual(left, parent.find(value), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1082 = result__;
+                                                       var tmp1176 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Return right node if value is found on right node", function(event, callback) {
@@ -148,7 +148,7 @@ var result__ = mobl.test.testSuite("Find", [mobl.test.testCase("Return parent if
                                                      var result__ = mobl.instantiate(bst.Node, {'value': 1, 'right': right});
                                                      var parent = result__;
                                                      mobl.test.assertEqual(right, parent.find(value), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1083 = result__;
+                                                       var tmp1177 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Find left recursively", function(event, callback) {
@@ -163,7 +163,7 @@ var result__ = mobl.test.testSuite("Find", [mobl.test.testCase("Return parent if
                                                      var parent = result__;
                                                      var result__ = parent.insert(leftLeft);
                                                      mobl.test.assertEqual(leftLeft, parent.find(value), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1084 = result__;
+                                                       var tmp1178 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Find right recursively", function(event, callback) {
@@ -178,7 +178,7 @@ var result__ = mobl.test.testSuite("Find", [mobl.test.testCase("Return parent if
                                                      var parent = result__;
                                                      var result__ = parent.insert(right_right);
                                                      mobl.test.assertEqual(right_right, parent.find(value), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1085 = result__;
+                                                       var tmp1179 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Return null for nonexistent value", function(event, callback) {
@@ -190,7 +190,7 @@ var result__ = mobl.test.testSuite("Find", [mobl.test.testCase("Return parent if
                                                      var result__ = mobl.instantiate(bst.Node, {'value': 2, 'left': left, 'right': right});
                                                      var parent = result__;
                                                      mobl.test.assertEqual(null, parent.find(4), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1086 = result__;
+                                                       var tmp1180 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    })]);
@@ -203,7 +203,7 @@ var result__ = mobl.test.testSuite("Deletion", [mobl.test.testCase("Delete a nod
                                                      var result__ = parent.insert(child);
                                                      var result__ = parent.delete(1);
                                                      mobl.test.assertEqual(null, parent.left, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1087 = result__;
+                                                       var tmp1181 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Delete a node with one child", function(event, callback) {
@@ -218,7 +218,7 @@ var result__ = mobl.test.testSuite("Deletion", [mobl.test.testCase("Delete a nod
                                                      var result__ = parent.insert(grandChild);
                                                      var result__ = parent.delete(1);
                                                      mobl.test.assertEqual(grandChild, parent.left, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1088 = result__;
+                                                       var tmp1182 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Delete a node with both children", function(event, callback) {
@@ -236,11 +236,11 @@ var result__ = mobl.test.testSuite("Deletion", [mobl.test.testCase("Delete a nod
                                                      var result__ = parent.insert(rightGrandChild);
                                                      var result__ = parent.delete(2);
                                                      mobl.test.assertEqual(rightGrandChild, parent.left, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1089 = result__;
+                                                       var tmp1183 = result__;
                                                        mobl.test.assertEqual(null, parent.right, mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1090 = result__;
+                                                         var tmp1184 = result__;
                                                          mobl.test.assertEqual(null, parent.find(2), mobl.test.defaultMatcher, function(result__) {
-                                                           var tmp1091 = result__;
+                                                           var tmp1185 = result__;
                                                            if(callback && callback.apply) callback(); return;
                                                          });
                                                        });
@@ -272,25 +272,25 @@ var result__ = mobl.test.testSuite("Deletion", [mobl.test.testCase("Delete a nod
                                                      var result__ = node8.insert(node4);
                                                      var result__ = node8.delete(node4.value);
                                                      mobl.test.assertEqual(5, node8.left.value, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1092 = result__;
+                                                       var tmp1186 = result__;
                                                        mobl.test.assertEqual(null, node8.right, mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1093 = result__;
+                                                         var tmp1187 = result__;
                                                          mobl.test.assertEqual(node1, node8.find(1), mobl.test.defaultMatcher, function(result__) {
-                                                           var tmp1094 = result__;
+                                                           var tmp1188 = result__;
                                                            mobl.test.assertEqual(node2, node8.find(2), mobl.test.defaultMatcher, function(result__) {
-                                                             var tmp1095 = result__;
+                                                             var tmp1189 = result__;
                                                              mobl.test.assertEqual(node3, node8.find(3), mobl.test.defaultMatcher, function(result__) {
-                                                               var tmp1096 = result__;
+                                                               var tmp1190 = result__;
                                                                mobl.test.assertEqual(null, node8.find(4), mobl.test.defaultMatcher, function(result__) {
-                                                                 var tmp1097 = result__;
+                                                                 var tmp1191 = result__;
                                                                  mobl.test.assertEqual(node5, node8.find(5), mobl.test.defaultMatcher, function(result__) {
-                                                                   var tmp1098 = result__;
+                                                                   var tmp1192 = result__;
                                                                    mobl.test.assertEqual(node6, node8.find(6), mobl.test.defaultMatcher, function(result__) {
-                                                                     var tmp1099 = result__;
+                                                                     var tmp1193 = result__;
                                                                      mobl.test.assertEqual(node7, node8.find(7), mobl.test.defaultMatcher, function(result__) {
-                                                                       var tmp1100 = result__;
+                                                                       var tmp1194 = result__;
                                                                        mobl.test.assertEqual(node8, node8.find(8), mobl.test.defaultMatcher, function(result__) {
-                                                                         var tmp1101 = result__;
+                                                                         var tmp1195 = result__;
                                                                          if(callback && callback.apply) callback(); return;
                                                                        });
                                                                      });
@@ -308,11 +308,11 @@ var result__ = mobl.test.testSuite("Deletion", [mobl.test.testCase("Delete a nod
                                                      var node = result__;
                                                      var result__ = node.delete(1);
                                                      mobl.test.assertEqual(0, node.value, mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1102 = result__;
+                                                       var tmp1196 = result__;
                                                        mobl.test.assertEqual(null, node.left, mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1103 = result__;
+                                                         var tmp1197 = result__;
                                                          mobl.test.assertEqual(null, node.right, mobl.test.defaultMatcher, function(result__) {
-                                                           var tmp1104 = result__;
+                                                           var tmp1198 = result__;
                                                            if(callback && callback.apply) callback(); return;
                                                          });
                                                        });
@@ -325,7 +325,7 @@ var result__ = mobl.test.testSuite("Sort", [mobl.test.testCase("Sort a tree with
                                                      var result__ = parent.sort();
                                                      var sorted = result__;
                                                      mobl.test.assertEqual(0, sorted.get(0), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1105 = result__;
+                                                       var tmp1199 = result__;
                                                        if(callback && callback.apply) callback(); return;
                                                      });
                                                    }), mobl.test.testCase("Sort a tree with two nodes", function(event, callback) {
@@ -338,9 +338,9 @@ var result__ = mobl.test.testSuite("Sort", [mobl.test.testCase("Sort a tree with
                                                      var result__ = node2.sort();
                                                      var sorted = result__;
                                                      mobl.test.assertEqual(1, sorted.get(0), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1106 = result__;
+                                                       var tmp1200 = result__;
                                                        mobl.test.assertEqual(2, sorted.get(1), mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1107 = result__;
+                                                         var tmp1201 = result__;
                                                          if(callback && callback.apply) callback(); return;
                                                        });
                                                      });
@@ -372,21 +372,21 @@ var result__ = mobl.test.testSuite("Sort", [mobl.test.testCase("Sort a tree with
                                                      var result__ = node8.sort();
                                                      var sorted = result__;
                                                      mobl.test.assertEqual(1, sorted.get(0), mobl.test.defaultMatcher, function(result__) {
-                                                       var tmp1108 = result__;
+                                                       var tmp1202 = result__;
                                                        mobl.test.assertEqual(2, sorted.get(1), mobl.test.defaultMatcher, function(result__) {
-                                                         var tmp1109 = result__;
+                                                         var tmp1203 = result__;
                                                          mobl.test.assertEqual(3, sorted.get(2), mobl.test.defaultMatcher, function(result__) {
-                                                           var tmp1110 = result__;
+                                                           var tmp1204 = result__;
                                                            mobl.test.assertEqual(4, sorted.get(3), mobl.test.defaultMatcher, function(result__) {
-                                                             var tmp1111 = result__;
+                                                             var tmp1205 = result__;
                                                              mobl.test.assertEqual(5, sorted.get(4), mobl.test.defaultMatcher, function(result__) {
-                                                               var tmp1112 = result__;
+                                                               var tmp1206 = result__;
                                                                mobl.test.assertEqual(6, sorted.get(5), mobl.test.defaultMatcher, function(result__) {
-                                                                 var tmp1113 = result__;
+                                                                 var tmp1207 = result__;
                                                                  mobl.test.assertEqual(7, sorted.get(6), mobl.test.defaultMatcher, function(result__) {
-                                                                   var tmp1114 = result__;
+                                                                   var tmp1208 = result__;
                                                                    mobl.test.assertEqual(8, sorted.get(7), mobl.test.defaultMatcher, function(result__) {
-                                                                     var tmp1115 = result__;
+                                                                     var tmp1209 = result__;
                                                                      if(callback && callback.apply) callback(); return;
                                                                    });
                                                                  });
